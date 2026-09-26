@@ -15,6 +15,8 @@ A wizard is ephemeral by default: built for one run, saved to a scratch or `scri
 
 ### 1. Scope the procedure
 
+If the wizard captures any secret, first settle where secrets live in this repo. Read `docs/agents/secrets.md`. If it's missing, this is the repo's first wizard: ask the user how the repo manages secrets today, and explicitly whether there's an external secret store (Infisical, Vault, 1Password, Doppler, a cloud secret manager, or similar). If there is one, work out with them how this machine reaches it: CLI or API, how it authenticates and where that credential lives, and which project, path, or environment the repo's secrets belong in. Record the answers in `docs/agents/secrets.md` so later wizards read it instead of asking again. The file describes access; it never holds a credential.
+
 Work out every manual step the human must take and every value that gets captured along the way. Read the repo first, don't ask cold:
 
 - For setup: `.env`, `.env.example`, `.env.*`, `README`, `docker-compose*`, framework config, and `.github/workflows/*` (every `secrets.*` / `vars.*` reference is a value the wizard must produce).
@@ -22,7 +24,7 @@ Work out every manual step the human must take and every value that gets capture
 
 Then show the user the ordered list of stages and the values each produces, and confirm: they may add, drop, or reorder.
 
-**Done when:** every stage is named in order, and for each captured value you know (a) where the human gets it, (b) where it's written (`.env`, a GitHub secret, both, or nowhere; some stages are pure actions), and (c) whether it's secret (hidden entry) or public.
+**Done when:** every stage is named in order, and for each captured value you know (a) where the human gets it, (b) where it's written (the external secret store if the repo has one, `.env`, a GitHub secret, or nowhere; some stages are pure actions), and (c) whether it's secret (hidden entry) or public.
 
 ### 2. Map each stage's journey
 
@@ -34,11 +36,11 @@ For each stage, write the precise path a human follows: which URL to open, what 
 
 Copy `template.sh` to the target path. Replace the example stage with one `stage` per step, in dependency order. Use the library helpers: `stage`, `say`/`step`, `open_url`, `ask`/`ask_secret`, `write_env`, `set_secret`/`set_var`, `pause`/`confirm`. Set `TOTAL_STAGES` to the number of stages you wrote.
 
-Hold the bar the template sets: open the URL before asking for its value, use `ask_secret` for anything secret, `write_env` every persisted value, `set_secret` only the values CI actually needs, and `confirm` before any irreversible action. Each `stage` clears the screen so only the current step is visible: keep a stage to one focused task so nothing the human needs scrolls away. Don't touch the library above the marker.
+Hold the bar the template sets: open the URL before asking for its value, use `ask_secret` for anything secret, `write_env` every persisted value, `set_secret` only the values CI actually needs, and `confirm` before any irreversible action. When `docs/agents/secrets.md` names an external store, write each captured secret there too, using the access it records; put that helper below the marker, never in the library. Each `stage` clears the screen so only the current step is visible: keep a stage to one focused task so nothing the human needs scrolls away. Don't touch the library above the marker.
 
 ### 4. Verify and hand off
 
 - `bash -n <script>`; run `shellcheck` if available.
 - `chmod +x <script>`.
-- Don't run it end-to-end yourself: it opens browsers and blocks on human input. Trace it statically instead: every value from step 1 is captured and lands where step 1 said, and every `set_secret` name exactly matches a `secrets.*` reference in CI.
+- Don't run it end-to-end yourself: it opens browsers and blocks on human input. Trace it statically instead: every value from step 1 is captured and lands where step 1 said, and every `set_secret` name exactly matches a `secrets.*` reference in CI, and every secret also reaches the external store when the repo has one.
 - Tell the user how to run it. If it's a repeatable setup path, commit it and link it from the README so the next person runs the script instead of asking an AI.

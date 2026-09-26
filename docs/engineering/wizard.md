@@ -29,10 +29,13 @@ A **stage** is one focused task on one screen. The script clears the terminal be
 
 Scoping happens before a line is written. The [skill](https://www.aihero.dev/ai-coding-dictionary/skill) reads the repo instead of asking cold: `.env*`, `docker-compose*`, framework config, and every `secrets.*` / `vars.*` reference in `.github/workflows/`: each of those is a value the wizard has to produce. It then shows you the ordered stage list to confirm, and only after that maps each stage to the exact path a human follows ("Dashboard → Developers → API keys → Reveal test key → copy"). Where it doesn't know the current UI, it asks you or checks the docs rather than inventing clicks.
 
+Before that, if the procedure captures any secret, the skill settles where secrets live in your repo. It reads `docs/agents/secrets.md`; on a repo's first wizard, when that file doesn't exist yet, it asks you how you manage secrets and whether there's an external secret store (Infisical, Vault, 1Password, Doppler, a cloud secret manager). If there is one, it works out with you how this machine reaches it, then records the answer in `docs/agents/secrets.md` (access details only, never a credential) so the next wizard doesn't ask again.
+
 For each captured value, scoping settles where it lands:
 
 | Destination | When |
 | --- | --- |
+| Your external secret store | It's a secret and the repo has one; `.env` and CI get their copies too |
 | `.env` only | Local dev needs it, CI doesn't |
 | GitHub secret | CI reads it, and it's sensitive |
 | GitHub variable | CI reads it, and it's public |
@@ -57,6 +60,10 @@ The agent that writes a wizard never runs it end to end, because it opens browse
 **Do my API keys end up in the model's context?**
 
 No. The agent writes a script; it doesn't run it. You run the script yourself, and it captures the key with hidden terminal entry and writes it straight to `.env` or `gh secret`. The wizard is a CLI, and the model is not connected to it. One caveat: that holds for values the wizard captures at runtime. If you paste a key into the chat while scoping the procedure, it's in the [context](https://www.aihero.dev/ai-coding-dictionary/context) like any other pasted text.
+
+**We keep secrets in a vault. Will it write there?**
+
+Yes, once it knows about it. The first wizard in a repo asks whether you have an external secret store and how this machine reaches it, and records the answer in `docs/agents/secrets.md`. From then on every wizard in that repo writes each captured secret to the store as well as to `.env` and CI. Edit that file directly if your setup changes.
 
 **Can I go back and fix a value I mistyped?**
 
@@ -89,6 +96,7 @@ It did. It's now model-invoked, so the agent reaches for it unprompted when it h
 - You're shown an ordered list of stages, and the values each one produces, and asked to confirm, before any script exists.
 - Every URL is opened before the value from that page is asked for. You're never asked to paste something you haven't been sent to fetch.
 - Secrets are typed blind. Nothing sensitive echoes into your scrollback.
+- On a repo's first wizard you're asked about your secret store, and never again after that; if you have one, every secret lands there.
 - Each stage fits one screen. Nothing you still need has scrolled away.
 - Ctrl-C and re-run picks up where you left off, offering the values already saved as defaults.
 - The final screen lists what it wrote, and separately lists what it couldn't do and you have to finish by hand.
