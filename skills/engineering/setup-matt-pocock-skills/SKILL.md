@@ -6,6 +6,8 @@ disable-model-invocation: true
 
 # Setup Matt Pocock's Skills
 
+**Auto mode guard.** This skill only works with a human answering. If you are running in an autonomous or auto mode where the user's approvals are skipped, stop before anything else: ask no questions, make no assumptions, write no files, and tell the user: "Auto mode is on. This skill needs your answers, so I've stopped. Switch auto mode off and run it again." In Claude Code, auto mode shows up as an `## Auto Mode Active` system reminder, and `## Exited Auto Mode` ends it: the latest of the two wins. If your harness gives no such signal, this guard cannot fire, so carry on: ask, and wait for the answers.
+
 Scaffold the per-repo configuration that the engineering skills assume:
 
 - **Issue tracker**: where issues live (GitHub by default; local markdown is also supported out of the box)

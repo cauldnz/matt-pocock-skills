@@ -74,6 +74,8 @@ Every lesson should be tied into the mission - the reason that the user is inter
 
 If the user is unclear about the mission, or the `MISSION.md` is not populated, your first job should be to question the user on why they want to learn this.
 
+**Auto mode guard.** Only the user can give you the mission. If the mission needs questioning and you are running in an autonomous or auto mode where the user's approvals are skipped, stop before creating any file in the workspace: ask no questions, make no assumptions, and tell the user: "Auto mode is on. This skill needs your answers, so I've stopped. Switch auto mode off and run it again." In Claude Code, auto mode shows up as an `## Auto Mode Active` system reminder, and `## Exited Auto Mode` ends it: the latest of the two wins. If your harness gives no such signal, this guard cannot fire, so carry on: ask, and wait for the answers.
+
 Failing to understand the mission will mean knowledge acquisition is not grounded in real-world goals. Lessons will feel too abstract. You will have no way of judging what the user should do next.
 
 Missions may change as the user develops more skills and knowledge. This is normal - make sure to update the `MISSION.md` and add a learning record to capture the change. Confirm with the user before changing the mission.

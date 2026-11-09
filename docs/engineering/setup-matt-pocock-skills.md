@@ -81,6 +81,9 @@ Not today. A user who runs the skills across many repos has an open request for 
 
 One long-standing complaint says yes, in these words: *"having a skill to set up the other skill does not feel right to me: that means the LLM is configuring its own skills."* The trade-off is real. Without a setup step, every skill that touches issues would need its own copy of the tracker instructions. The output is markdown you can read and edit, and that limits the risk. You can read every file it wrote and change it by hand. Make day-to-day changes that way, not with another run.
 
+**It stopped and said auto mode is on. Why?**
+Setup needs your pick of issue tracker and labels, and it edits `CLAUDE.md` or `AGENTS.md`, so it will not guess them for you. In [auto mode](https://code.claude.com/docs/en/permission-modes) the agent is nudged to keep going without asking, so left alone it would answer for you. The skill refuses instead: it asks nothing, assumes nothing, and writes nothing. Switch auto mode off and run it again. There is no override. 
+
 ## It's working if
 
 - `docs/agents/issue-tracker.md` and `docs/agents/domain.md` exist, plus `triage-labels.md` if `triage` is installed.
@@ -88,6 +91,7 @@ One long-standing complaint says yes, in these words: *"having a skill to set up
 - The tracker it proposed matches the remote you use, and the label strings match labels that exist in your tracker.
 - Afterwards, `/to-tickets` publishes without asking you where issues live, and `/triage` applies labels rather than inventing them.
 - Nothing in the skill files themselves changed. If setup edited a `SKILL.md`, something went wrong.
+- In auto mode it stops before exploring or writing any config, and in normal mode it asks as usual.
 
 ## Where it fits
 

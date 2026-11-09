@@ -4,6 +4,8 @@ description: Break a plan, spec, or the current conversation into a set of trace
 disable-model-invocation: true
 ---
 
+**Auto mode guard.** This skill needs the user to approve the breakdown. If you are running in an autonomous or auto mode where the user's approvals are skipped, stop before anything else: ask no questions, make no assumptions, write no files, and tell the user: "Auto mode is on. This skill needs your answers, so I've stopped. Switch auto mode off and run it again." In Claude Code, auto mode shows up as an `## Auto Mode Active` system reminder, and `## Exited Auto Mode` ends it: the latest of the two wins. If your harness gives no such signal, this guard cannot fire, so carry on: ask, and wait for the answers.
+
 # To Tickets
 
 Break a plan, spec, or conversation into a set of **tickets**: tracer-bullet vertical slices, each declaring the tickets that **block** it.

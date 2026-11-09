@@ -63,6 +63,9 @@ No. `grill-me` already asks in **rounds**. It asks the whole frontier of open qu
 **Couldn't I just ask the agent for this without a skill?**
 Yes, and plenty of people did before it existed: `OPEN_QUESTIONS.md` files, spreadsheets sent to clients, a "needs more info" ticket per unanswered question. The skill buys you two things: the interview never drifts onto the subject, and the document comes out in a shape a non-technical recipient can fill in. If you already have a house format that works, you don't need this.
 
+**It stopped and said auto mode is on. Why?**
+It cannot know who the questionnaire is for or what you need back, and those are the whole job. In [auto mode](https://code.claude.com/docs/en/permission-modes) the agent is nudged to keep going without asking, so left alone it would answer for you. The skill refuses instead: it asks nothing, assumes nothing, and writes nothing. Switch auto mode off and run it again. There is no override. 
+
 ## It's working if
 
 - It asks about the recipient and about what you need back, then stops asking. If it asks about the subject itself, the skill has gone wrong.
@@ -70,6 +73,7 @@ Yes, and plenty of people did before it existed: `OPEN_QUESTIONS.md` files, spre
 - The questions read as aimed at what the *recipient* knows, not as your own open questions copied down verbatim.
 - You could hand the file to someone who wasn't in the conversation and they would know why they got it and by when to reply.
 - The answers that come back are usable input for a new grilling round, rather than a fresh set of questions.
+- In auto mode it stops at once with a plain message and does nothing else, and in normal mode it asks as usual.
 
 ## Where it fits
 

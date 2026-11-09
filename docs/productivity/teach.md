@@ -79,6 +79,9 @@ No. Most reported use is outside coding: Korean, Japanese formal register, piano
 **Which model should I run it with?**
 There is no canonical answer, and the reported differences are large. Users report that higher [reasoning effort](https://www.aihero.dev/ai-coding-dictionary/effort) produces better lessons than the medium setting. One user ran the same skill through Copilot CLI with Codex and got a single 30-line HTML card where Claude Code produced a full lesson. It runs unmodified in Claude Cowork, if your organisation lets you add skills there. If the lessons come out thin, change model, [harness](https://www.aihero.dev/ai-coding-dictionary/harness) or effort before rewriting your prompt.
 
+**It stopped and said auto mode is on. Why?**
+When `MISSION.md` is empty or unclear, only you can say why you want to learn the topic, so it stops before creating any workspace files. In [auto mode](https://code.claude.com/docs/en/permission-modes) the agent is nudged to keep going without asking, so left alone it would answer for you. The skill refuses instead: it asks nothing, assumes nothing, and writes nothing. Switch auto mode off and run it again. There is no override. Once a mission exists, lessons run normally.
+
 ## It's working if
 
 - The first thing it does in an empty directory is interview you about why you want this, rather than produce a lesson.
@@ -89,6 +92,7 @@ There is no canonical answer, and the reported differences are large. Users repo
 - `learning-records/` grows, and lessons stop re-teaching what you have already demonstrated.
 - The lessons look like one course: they link the stylesheet in `assets/` rather than each carrying its own.
 - A question that needs judgement gets you pointed at a forum, subreddit or class, not just an answer.
+- With no mission yet, auto mode stops it before any file is written, and with a mission in place it carries on.
 
 ## Where it fits
 

@@ -3,6 +3,8 @@ name: grilling
 description: Grill the user relentlessly about a plan, decision, or idea. Use when the user wants to stress-test their thinking, or uses any 'grill' trigger phrases.
 ---
 
+**Auto mode guard.** This skill only works with a human answering. If you are running in an autonomous or auto mode where the user's approvals are skipped, stop before anything else: ask no questions, make no assumptions, write no files, and tell the user: "Auto mode is on. This skill needs your answers, so I've stopped. Switch auto mode off and run it again." In Claude Code, auto mode shows up as an `## Auto Mode Active` system reminder, and `## Exited Auto Mode` ends it: the latest of the two wins. If your harness gives no such signal, this guard cannot fire, so carry on: ask, and wait for the answers.
+
 Interview the user relentlessly until you reach a shared understanding. Map this as a **design tree**: every decision branches into the decisions that hang off it.
 
 Work the tree in **rounds**. The **frontier** is every decision whose prerequisites are already settled: the questions you can ask _now_ without guessing at answers you haven't heard yet. Ask the whole frontier in one round: number each question and give your recommended answer. Then wait for the user's answers before the next round.

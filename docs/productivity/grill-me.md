@@ -42,6 +42,7 @@ Sessions grow too long when you try to talk through an ungrillable question. The
 - Questions arrive in a few rounds, not one at a time for a long time, and later rounds clearly build on what you said earlier.
 - You end up somewhere you didn't expect, because a question showed you a decision you had been making without noticing.
 - At the end you could defend each choice to someone who wasn't there.
+- In auto mode it stops at once with a plain message and does nothing else, and in normal mode it asks as usual.
 
 ## Common questions
 
@@ -66,6 +67,9 @@ No. The value of the session is the [context](https://www.aihero.dev/ai-coding-d
 
 **Does the model matter?**
 More than for most skills. Grilling depends on the [model](https://www.aihero.dev/ai-coding-dictionary/model)'s own knowledge of how systems break, so use your best one. Implementation mostly follows context, so a cheaper model is fine there.
+
+**It stopped and said auto mode is on. Why?**
+`grill-me` runs [grilling](https://aihero.dev/skills-grilling), which will not interview anyone who is not there to answer. In [auto mode](https://code.claude.com/docs/en/permission-modes) the agent is nudged to keep going without asking, so left alone it would answer for you. The skill refuses instead: it asks nothing, assumes nothing, and writes nothing. Switch auto mode off and run it again. There is no override. 
 
 ## Where it fits
 

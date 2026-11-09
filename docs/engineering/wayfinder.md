@@ -86,6 +86,9 @@ There is no official guidance, and the agent's default is unhelpful. It tends to
 **Where did `decision-mapping` go?**
 It is this skill. v1.1 renamed it to `wayfinder`, and you invoke it as `/wayfinder`. "Decision map" was jargon, and it was also inaccurate, because only one of the four ticket types is a decision by itself. The new name gave the skill one consistent vocabulary (destination, fog of war, frontier, the map) instead of an invented term on top. The unit kept the word "decision": a wayfinder ticket is a **decision ticket**, so that people do not read it as an implementation ticket.
 
+**It stopped and said auto mode is on. Why?**
+Charting a map and working a human-in-the-loop ticket both need you to answer. Charting stops before it creates a map or a ticket, and a human-in-the-loop ticket stops before it is claimed. In [auto mode](https://code.claude.com/docs/en/permission-modes) the agent is nudged to keep going without asking, so left alone it would answer for you. The skill refuses instead: it asks nothing, assumes nothing, and writes nothing. Switch auto mode off and run it again. There is no override. AFK tickets (research, and tasks the agent can do alone) are not guarded and run as normal.
+
 ## It's working if
 
 - The destination is written down and agreed before a single ticket exists.
@@ -95,6 +98,7 @@ It is this skill. v1.1 renamed it to `wayfinder`, and you invoke it as `/wayfind
 - **Not yet specified** shrinks over time. When fog graduates into a ticket, it leaves that section and does not appear in both places.
 - When the opening breadth-first grill finds no fog at all, the skill stops and tells you the effort is small enough to skip the map.
 - The session that finishes the map points you toward a spec, not a pull request.
+- In auto mode, charting or a human-in-the-loop ticket stops with a plain message and nothing is created or claimed, while an AFK research ticket still runs.
 
 ## Where it fits
 

@@ -79,6 +79,9 @@ The template asks for criteria and says nothing about whether they can fail, so 
 **The tickets are published. How do I actually run them?**
 The skill stops at the artifact, and there is no auto-dispatch mode. Dispatch is manual: look at the board, count the tickets with no open blockers, and open that many agent sessions. Give each ticket a fresh context, and clear between them. [implement](https://aihero.dev/skills-implement) does not reliably close or check off the ticket when it finishes, on GitHub or in local markdown, so you update the ticket's state yourself.
 
+**It stopped and said auto mode is on. Why?**
+The breakdown has to be approved by you before anything reaches the tracker, so it will not approve it for you. In [auto mode](https://code.claude.com/docs/en/permission-modes) the agent is nudged to keep going without asking, so left alone it would answer for you. The skill refuses instead: it asks nothing, assumes nothing, and writes nothing. Switch auto mode off and run it again. There is no override. 
+
 ## It's working if
 
 - Every ticket has an answer to "what can I demo when this is done?", and the answer is behaviour, not a layer.
@@ -87,6 +90,7 @@ The skill stops at the artifact, and there is no auto-dispatch mode. Dispatch is
 - Nothing in a ticket body is a file path or a line number, except a snippet a prototype produced.
 - Each ticket reads like something a fresh session could finish without you in the room.
 - Prefactoring, where it found any, is at the front of the order rather than mixed into feature tickets.
+- In auto mode it stops before drafting or publishing a ticket, and in normal mode it asks as usual.
 
 ## Where it fits
 

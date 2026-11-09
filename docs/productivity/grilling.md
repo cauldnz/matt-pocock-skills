@@ -72,6 +72,9 @@ No, and a cap is out of scope on purpose. Some plans need three questions and so
 **`grill-with-docs` ran, but it never loaded `grilling`.**
 This is a real bug, still unfixed, and users report it across [harnesses](https://www.aihero.dev/ai-coding-dictionary/harness) and models. A skill that names another skill does not reliably cause that skill to load, and `grill-with-docs` names two. The sign is a session that asks everything at once with no recommendations. That means the model is improvising an interview rather than running this one. Asking the agent directly whether it loaded `grilling` and `domain-modeling` usually recovers it.
 
+**It stopped and said auto mode is on. Why?**
+An interview only means something when you answer it. In [auto mode](https://code.claude.com/docs/en/permission-modes) the agent is nudged to keep going without asking, so left alone it would answer for you. The skill refuses instead: it asks nothing, assumes nothing, and writes nothing. Switch auto mode off and run it again. There is no override. Where a harness gives the agent no auto mode signal, the guard cannot fire and the skill simply asks and waits.
+
 ## It's working if
 
 - A round arrives as a numbered list, each question with its recommendation on a separate `➡️` line, and you can answer the whole round by number.
@@ -81,6 +84,7 @@ This is a real bug, still unfixed, and users report it across [harnesses](https:
 - Research running in the background does not stall the round; only the questions that depend on it wait.
 - It stops at the end and asks you to confirm the understanding is shared, instead of starting work.
 - Question count stays high while round count stays low.
+- In auto mode it stops before the first question with a plain message and writes nothing, and in normal mode it asks as usual.
 
 ## Where it fits
 

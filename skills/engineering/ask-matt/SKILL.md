@@ -10,6 +10,8 @@ You don't remember every skill, so ask.
 
 Before stating what a skill does or recommending a step be skipped, read that skill's SKILL.md: the summaries here are for orientation only.
 
+Skills that interview you (`/grilling` and the skills built on it, `/setup-matt-pocock-skills`, `/to-tickets`, `/to-questionnaire`, and the human-in-the-loop parts of `/wayfinder` and `/teach`) stop if the session is in auto mode. Switch it off and run them again.
+
 A **flow** is a path through the skills. Most paths run along one **main flow**, and two **on-ramps** merge onto it. Everything else is standalone, or a vocabulary layer that runs underneath.
 
 ## The main flow: idea → ship

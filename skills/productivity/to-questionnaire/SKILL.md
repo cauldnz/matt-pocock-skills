@@ -4,6 +4,8 @@ description: Turn a decision you can't fully answer into a questionnaire for som
 disable-model-invocation: true
 ---
 
+**Auto mode guard.** This skill only works with a human answering. If you are running in an autonomous or auto mode where the user's approvals are skipped, stop before anything else: ask no questions, make no assumptions, write no files, and tell the user: "Auto mode is on. This skill needs your answers, so I've stopped. Switch auto mode off and run it again." In Claude Code, auto mode shows up as an `## Auto Mode Active` system reminder, and `## Exited Auto Mode` ends it: the latest of the two wins. If your harness gives no such signal, this guard cannot fire, so carry on: ask, and wait for the answers.
+
 Turn something the user can't answer alone into a **questionnaire**: a Markdown document they hand to one person to fill in async, or fill out together over a meeting. The recipient holds knowledge the user lacks; the questionnaire pulls it out of them.
 
 **Grill the send, not the subject.** Interview the user only about the _send_, which they can always answer: who it goes to, and what they need back. The questions in the document then target the **gap** between what the recipient knows and what the user needs.

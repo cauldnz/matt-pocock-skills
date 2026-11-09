@@ -63,6 +63,9 @@ The skill's closing message is often open-ended, which is a known problem. In th
 **Why is it called that?**
 Nobody is happy with the name. There is an open suggestion to rename it `grill-domain-model`, which describes the behaviour more accurately. Nothing has moved on it. If a rename ever lands, the docs page moves with it and the URL changes.
 
+**It stopped and said auto mode is on. Why?**
+`grill-with-docs` runs [grilling](https://aihero.dev/skills-grilling) first, and stops there, so no `GLOSSARY.md` or ADR is written either. In [auto mode](https://code.claude.com/docs/en/permission-modes) the agent is nudged to keep going without asking, so left alone it would answer for you. The skill refuses instead: it asks nothing, assumes nothing, and writes nothing. Switch auto mode off and run it again. There is no override. 
+
 ## It's working if
 
 - `GLOSSARY.md` changes *during* the session, term by term, rather than appearing in one lump at the end.
@@ -70,6 +73,7 @@ Nobody is happy with the name. There is an open suggestion to rename it `grill-d
 - Questions the codebase can answer get answered by reading the codebase, not asked of you.
 - You get few or no ADRs, and the ones you get are decisions you would be annoyed to have to argue again.
 - It challenges a word you used because your existing glossary defines it differently.
+- In auto mode it stops at once with a plain message and does nothing else, and in normal mode it asks as usual.
 
 ## Where it fits
 

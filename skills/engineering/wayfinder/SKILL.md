@@ -104,6 +104,8 @@ Ruling something out of scope is a scoping act, not a step on the route. When a 
 
 Two modes. Either way, **never resolve more than one ticket per session**, with the exception of research tickets.
 
+**Auto mode guard.** Charting a map, and working a HITL ticket, need a human answering. If you are running in an autonomous or auto mode where the user's approvals are skipped, stop before creating, claiming, or writing anything for either: ask no questions, make no assumptions, and tell the user: "Auto mode is on. This skill needs your answers, so I've stopped. Switch auto mode off and run it again." In Claude Code, auto mode shows up as an `## Auto Mode Active` system reminder, and `## Exited Auto Mode` ends it: the latest of the two wins. If your harness gives no such signal, this guard cannot fire, so carry on: ask, and wait for the answers. AFK tickets (research, and tasks you can do alone) run as normal.
+
 ### Chart the map
 
 User invokes with a loose idea.
